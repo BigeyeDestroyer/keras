@@ -1077,6 +1077,7 @@ class Model(Container):
 
         # prepare input arrays and training function
         if self.uses_learning_phase and type(K.learning_phase()) is not int:
+            # Here, the [1.] is to set 'learning_phase()' which is a TensorVariable
             ins = x + y + sample_weights + [1.]
         else:
             ins = x + y + sample_weights
@@ -1138,6 +1139,7 @@ class Model(Container):
                                                            batch_size=batch_size)
         # prepare inputs, delegate logic to _test_loop
         if self.uses_learning_phase and type(K.learning_phase()) is not int:
+            # Here, the [0.] is to set 'K.learning_phase()' which is a TensorVariable
             ins = x + y + sample_weights + [0.]
         else:
             ins = x + y + sample_weights
