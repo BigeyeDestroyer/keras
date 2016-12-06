@@ -383,6 +383,9 @@ class Adam(Optimizer):
         t = self.iterations + 1
         lr_t = lr * K.sqrt(1. - K.pow(self.beta_2, t)) / (1. - K.pow(self.beta_1, t))
 
+        # All the operations here are 'symbolic', which means we just call them
+        # at the very beginning of our codes, and we won't encounter the initialization
+        # in the following operations.
         shapes = [K.get_variable_shape(p) for p in params]
         ms = [K.zeros(shape) for shape in shapes]
         vs = [K.zeros(shape) for shape in shapes]
